@@ -1,0 +1,11 @@
+{
+    "name": "gleed2dhaxe",
+    "url": "https://github.com/Partysun/gleed2dhaxe",
+    "license": "",
+    "tags": [ "gleed2d", "level editor", "cross", "neko", "flash", "js", "cpp"],
+    "description": "Gleed2d runtime for Haxe.",
+    "version": "0.0.1",
+    "releasenote": "",
+    "contributors": [ "Partysun" ],
+    "dependencies": {}
+}

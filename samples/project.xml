@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+    <meta title="gleed2dhaxe - LevelTest" package="" version="1.0.0" company="Yura Zatsepin" />
+    <app main="LevelTest" path="export" file="gleed2dhaxe-leveltest" />
+    <window width="320" height="480" fps="200" unless="mobile"/>
+    <window fps="60" if="mobile"/>
+    <source path="src" />
+
+    <haxelib name="openfl" />
+    <haxelib name="gleed2dhaxe" />
+
+    <assets path="assets" rename="assets" />
+
+</project>

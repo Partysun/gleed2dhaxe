@@ -1,0 +1,20 @@
+-cp src/
+-cp ../../../gleed2dhaxe/
+#-dce full
+-resource ./assets/level_sample.xml@map
+-debug
+-main TestMain
+--each
+
+-neko build/main.n
+#--macro Sys.println(':neko build success')
+
+--next
+-js build/main.js
+-D source-map-content
+#--macro Sys.println(':js build success')
+
+#--next
+#--macro Sys.println(':launch neko -->')
+#--macro Sys.println('')
+#-cmd neko main.n
