@@ -1,26 +1,18 @@
 package gleed2dhaxe;
 
 
-class ItemProperty 
+class ItemProperties
 {
     public var name:String;
-    @:isVar public var id(get, set):Int;
+    public var id:Int;
     public var isVisible:Bool;
     // The item's position in world space.
     public var position:Point;
 
     // A Dictionary containing any user-defined Properties.
-    //var customProperties:Array<CustomPropertie>;
+    public var customProperties:Array<CustomProperty> = new Array<CustomProperty>();
 
     public function new() {}
-
-    function get_id() {
-        return this.id; 
-    }
-
-    function set_id(id:Int) {
-        return this.id = id;
-    }
 
     public function toString():String {
         return name;

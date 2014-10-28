@@ -1,0 +1,9 @@
+" Press <F1> or ? for help
+
+▼ classes
+    Gleed2DMapLoader
+
+▼ functions
+    buildMap
+    load
+    new

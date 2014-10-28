@@ -8,7 +8,7 @@ class CustomProperty
     public var type:PropertyType;
     public var description:String;
   
-    public function new(name:String, value:Dynamic, type:PropertyType, description:String)
+    public function new(?name:String, ?value:Dynamic, ?type:PropertyType, ?description:String)
     {
         this.name = name;
         this.value = value;
@@ -27,5 +27,5 @@ enum PropertyType {
 	Bool;
 	Point;
 	Color;
-	ItemProperty;
+	//Item;
 }

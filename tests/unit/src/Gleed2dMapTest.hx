@@ -75,6 +75,8 @@ class Gleed2DMapTest extends TestCase {
         var map:Gleed2DMap = loader.load(source);
         assertEquals(map.name, "Level1");
         assertTrue(map.isVisible);
+        assertEquals(map.properties.nextItemNumber, null);
+
         //var content = haxe.Resource.getString("level");
         //var g:Gleed2D = new Gleed2D();
         //g.init(content);
