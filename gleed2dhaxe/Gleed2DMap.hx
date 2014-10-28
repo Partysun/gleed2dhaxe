@@ -13,7 +13,7 @@ class Gleed2DMap {
     /**
      * Level visibility
      */
-    public var visible:Bool;
+    public var isVisible:Bool;
 
     /**
      * Layers within level
