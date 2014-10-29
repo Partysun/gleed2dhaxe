@@ -9,7 +9,7 @@ class LayerItem {
 
     public function new() {}
         
-    public static function FromXml(source:Fast):LayerItem {
+    public static function FromXML(source:Fast):LayerItem {
         var layer:LayerItem = new LayerItem();
         switch(source.att.Type) {
             case "TextureItem":
@@ -25,11 +25,21 @@ class LayerItem {
                 properties.textureFilename = source.node.texture_filename.innerData;
                 properties.tint = Color.FromXML(source.node.TintColor);
                 //TODO: create from textureFilename asset name
-                //properties.assetName = source.node.texture_filename.innerData;
+                properties.assetName = TextureItemProperties.getFileName(properties.textureFilename);
                 layer.properties = properties;
                 trace("TextureItem");
                 //TODO
             case "PathItem":
+                var properties = new PathItemProperties();
+                properties.name = source.att.Name;
+                properties.isVisible = (source.att.Visible == "true") ? true : false;
+                properties.position = Point.FromXML(source.node.Position);
+                properties.lineWidth = Std.parseInt(source.node.LineWidth.innerData);
+                properties.lineColor = Color.FromXML(source.node.LineColor);
+                properties.isPolygon = (source.node.IsPolygon.innerData == "true") ? true : false;
+                properties.localPoints = ([for (local_point in source.node.LocalPoints.nodes.Vector2) Point.FromXML(local_point)]);
+                properties.worldPoints = ([for (world_point in source.node.WorldPoints.nodes.Vector2) Point.FromXML(world_point)]);
+                layer.properties = properties;
                 //TODO
                 trace("PathItem");
             case "CircleItem":

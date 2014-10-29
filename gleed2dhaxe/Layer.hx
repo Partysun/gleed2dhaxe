@@ -14,7 +14,7 @@ class Layer {
         properties.isVisible = (source.att.Visible == "true") ? true : false;
         properties.scrollFactor = Point.FromXML(source.node.ScrollSpeed);
 
-        items = ([for (item in source.node.Items.nodes.Item) LayerItem.FromXml(item)]);
+        items = ([for (item in source.node.Items.nodes.Item) LayerItem.FromXML(item)]);
     
         #if debug
         trace("Create new Layer");

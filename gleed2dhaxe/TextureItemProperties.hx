@@ -15,4 +15,19 @@ class TextureItemProperties extends ItemProperties
     public function new() {
         super();
     }
+
+    //TODO: create FromXML behavior
+
+    public static function getFileName (path:String):String {
+        var slash = path.lastIndexOf("/") == 0 ? path.lastIndexOf("/") : path.lastIndexOf("\\");
+        if (slash >= 0) {
+            path = path.substr(slash + 1);
+        }
+        return removeFileExtension(path);
+    }
+
+    public static function removeFileExtension (fileName:String):String {
+        var dot = fileName.lastIndexOf(".");
+        return (dot > 0) ? fileName.substr(0, dot) : fileName;
+    }
 }

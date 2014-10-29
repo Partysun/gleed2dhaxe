@@ -9,6 +9,7 @@ import gleed2dhaxe.Layer;
 import gleed2dhaxe.Color;
 import gleed2dhaxe.LevelProperties;
 import gleed2dhaxe.Point;
+import gleed2dhaxe.LayerItem;
 import gleed2dhaxe.CustomProperty;
 using gleed2dhaxe.CustomProperty;
 
@@ -91,9 +92,170 @@ class LoadLevelTest extends TestCase {
         assertEquals(level.layers[0].items[0].properties.tint.red, 255);
         assertEquals(level.layers[0].items[0].properties.position.x, 512);
         assertEquals(level.layers[0].items[0].properties.position.y, -320);
-        //if (level.layers[0].items[0].item.att.Type == "TextureItem") {
-                //buildTextureItem(item, i);
-            //}
+    }
+
+    public function testTextureItem() {
+        var source = "
+            <Item xsi:type='TextureItem' Name='Texture_0058' Visible='true'>
+                    <Position>
+                        <X>512</X>
+                        <Y>-320</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Y:\\Glue Project\\Test Sprites\\sky.png</texture_filename>
+                    <asset_name>Y:\\Glue Project\\Test Sprites\\sky</asset_name>
+                    <Origin>
+                        <X>512</X>
+                        <Y>384</Y>
+                    </Origin>
+                </Item>
+        ";
+        source = StringTools.replace(source, "xsi:type", "Type");
+        var source:Fast = new Fast(Xml.parse(source).firstElement());
+        var layerItem:LayerItem = gleed2dhaxe.LayerItem.FromXML(source);
+        assertEquals(source.att.Type, "TextureItem");
+        assertEquals(layerItem.properties.name, "Texture_0058");
+        assertEquals(layerItem.properties.isVisible, true);
+        assertEquals(layerItem.properties.position.x, 512);
+        assertEquals(layerItem.properties.position.y, -320);
+        assertEquals(layerItem.properties.rotation, 0);
+        assertEquals(layerItem.properties.scale.x, 1);
+        assertEquals(layerItem.properties.scale.y, 1);
+        assertEquals(layerItem.properties.tint.red, 255);
+        assertEquals(layerItem.properties.flipHorizontal, false);
+        assertEquals(layerItem.properties.flipVertical, false);
+        assertEquals(layerItem.properties.textureFilename, "Y:\\Glue Project\\Test Sprites\\sky.png");
+        assertEquals(layerItem.properties.assetName, "sky");
+        assertEquals(layerItem.properties.origin.x, 512);
+        assertEquals(layerItem.properties.origin.y, 384);
+    }
+
+    public function testPathItem() {
+        var source = "
+            <Item xsi:type='PathItem' Name='collision_1' Visible='true'>
+                    <Position>
+                        <X>0</X>
+                        <Y>896</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name='parametr1' Type='string' Description='parametrs description'>
+                            <string>198919891989</string>
+                        </Property>
+                    </CustomProperties>
+                    <LocalPoints>                        <Vector2>
+                            <X>0</X>
+                            <Y>0</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>4608</X>
+                            <Y>0</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>4608</X>
+                            <Y>-2240</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2560</X>
+                            <Y>-2240</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2560</X>
+                            <Y>-1344</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>3456</X>
+                            <Y>-1344</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>3456</X>
+                            <Y>-896</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>0</X>
+                            <Y>-896</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>0</X>
+                            <Y>0</Y>
+                        </Vector2>
+                    </LocalPoints>
+                    <WorldPoints>
+                        <Vector2>
+                            <X>0</X>
+                            <Y>896</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>4608</X>
+                            <Y>896</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>4608</X>
+                            <Y>-1344</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2560</X>
+                            <Y>-1344</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2560</X>
+                            <Y>-448</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>3456</X>
+                            <Y>-448</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>3456</X>
+                            <Y>0</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>0</X>
+                            <Y>0</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>0</X>
+                            <Y>896</Y>
+                        </Vector2>
+                    </WorldPoints>
+                    <IsPolygon>false</IsPolygon>
+                    <LineWidth>4</LineWidth>
+                    <LineColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </LineColor>
+                </Item>
+        ";
+        source = StringTools.replace(source, "xsi:type", "Type");
+        var source:Fast = new Fast(Xml.parse(source).firstElement());
+        var layerItem:LayerItem = gleed2dhaxe.LayerItem.FromXML(source);
+        assertEquals(source.att.Type, "PathItem");
+        assertEquals(layerItem.properties.name, "collision_1");
+        assertEquals(layerItem.properties.lineWidth, 4);
+        assertEquals(layerItem.properties.lineColor.red, 192);
+        assertEquals(layerItem.properties.lineColor.green, 0);
+        assertEquals(layerItem.properties.isPolygon, false);
+        assertEquals(layerItem.properties.localPoints.length, 9);
+        assertEquals(layerItem.properties.worldPoints.length, 9);
+        assertEquals(layerItem.properties.worldPoints[8].x, 0);
+        assertEquals(layerItem.properties.worldPoints[8].y, 896);
+        assertEquals(layerItem.properties.worldPoints[6].x, 3456);
     }
 
     public function testPoint() {
