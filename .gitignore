@@ -9,6 +9,7 @@ build-test/
 build/
 bin/
 export/
+tags
 
 # OS specific files
 .DS_Store
