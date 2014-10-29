@@ -27,7 +27,7 @@ class LayerItem {
                 //TODO: create from textureFilename asset name
                 properties.assetName = TextureItemProperties.getFileName(properties.textureFilename);
                 layer.properties = properties;
-                trace("TextureItem");
+                //trace("TextureItem");
                 //TODO
             case "PathItem":
                 var properties = new PathItemProperties();
@@ -41,7 +41,7 @@ class LayerItem {
                 properties.worldPoints = ([for (world_point in source.node.WorldPoints.nodes.Vector2) Point.FromXML(world_point)]);
                 layer.properties = properties;
                 //TODO
-                trace("PathItem");
+                //trace("PathItem");
             case "CircleItem":
                 //TODO
                 trace("CircleItem");
@@ -53,7 +53,7 @@ class LayerItem {
         }
         return layer;
         #if debug
-        trace("Create new LayerItem");
+        //trace("Create new LayerItem");
         #end
     }
 

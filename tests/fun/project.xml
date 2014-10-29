@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 
-    <meta title="gleed2dhaxe - MapTest" package="" version="1.0.0" company="Yura Zatsepin" />
-    <app main="MapStateTest" path="export" file="gleed2dhaxe-maptest" />
+    <meta title="gleed2dhaxe - LevelTest" package="" version="1.0.0" company="Yura Zatsepin" />
+    <app main="LevelStateTest" path="export" file="gleed2dhaxe-leveltest" />
     <window width="320" height="480" fps="200" unless="mobile"/>
     <window width="640" height="480" fps="40" if="html5"/>
     <window fps="60" if="mobile"/>

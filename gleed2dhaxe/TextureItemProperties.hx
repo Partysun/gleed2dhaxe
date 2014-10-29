@@ -8,6 +8,9 @@ class TextureItemProperties extends ItemProperties
     public var scale:Point;
     public var flipHorizontal:Bool;
     public var flipVertical:Bool;
+    // The item's origin relative to the upper left corner of the texture.
+    // Usually the middle of the texture.
+    // Used for placing and rotating the texture when drawn.
     public var origin:Point;
     public var textureFilename:String;
     public var assetName:String;
@@ -23,7 +26,8 @@ class TextureItemProperties extends ItemProperties
         if (slash >= 0) {
             path = path.substr(slash + 1);
         }
-        return removeFileExtension(path);
+        //return removeFileExtension(path);
+        return path;
     }
 
     public static function removeFileExtension (fileName:String):String {
