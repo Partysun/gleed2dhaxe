@@ -12,7 +12,7 @@ class Layer {
         properties = new LayerProperties();
         properties.name = source.att.Name;
         properties.isVisible = (source.att.Visible == "true") ? true : false;
-        properties.scrollFactor = new Point(source.node.ScrollSpeed);
+        properties.scrollFactor = Point.FromXML(source.node.ScrollSpeed);
 
         items = ([for (item in source.node.Items.nodes.Item) LayerItem.FromXml(item)]);
     

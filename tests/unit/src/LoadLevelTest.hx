@@ -46,7 +46,7 @@ class LoadLevelTest extends TestCase {
         assertEquals(cp.value.x, 20);
         assertEquals(cp.value.y, 30);
 
-        var color:Color = {red:255, green:255, blue:255, alpha:255};
+        var color:Color = new Color(255, 255, 255, 255);
         cp = new CustomProperty(",mlovely color", color, Color, "Like a gentleman...");
         assertEquals(cp.type, Color);
         assertEquals(cp.value.red, color.red);
@@ -88,6 +88,9 @@ class LoadLevelTest extends TestCase {
         assertEquals(level.layers[0].items[0].properties.flipHorizontal, false);
         assertEquals(level.layers[0].items[0].properties.flipVertical, false);
         assertEquals(level.layers[0].items[0].properties.textureFilename, "Y:\\Glue Project\\Test Sprites\\sky.png");
+        assertEquals(level.layers[0].items[0].properties.tint.red, 255);
+        assertEquals(level.layers[0].items[0].properties.position.x, 512);
+        assertEquals(level.layers[0].items[0].properties.position.y, -320);
         //if (level.layers[0].items[0].item.att.Type == "TextureItem") {
                 //buildTextureItem(item, i);
             //}
@@ -101,7 +104,7 @@ class LoadLevelTest extends TestCase {
             </ScrollSpeed>
         ");
         var source:Fast = new Fast(xml.firstElement());
-        var point:Point = new Point(source);
+        var point:Point = gleed2dhaxe.Point.FromXML(source);
         assertEquals(point.x, 1);
         assertEquals(point.y, 1);
     }

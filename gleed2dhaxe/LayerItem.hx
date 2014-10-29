@@ -16,12 +16,14 @@ class LayerItem {
                 var properties = new TextureItemProperties();
                 properties.name = source.att.Name;
                 properties.isVisible = (source.att.Visible == "true") ? true : false;
-                properties.scale = new Point(source.node.Scale);
+                properties.position = Point.FromXML(source.node.Position);
+                properties.scale = Point.FromXML(source.node.Scale);
                 properties.rotation = Std.parseFloat(source.node.Rotation.innerData);
                 properties.flipHorizontal = (source.node.FlipHorizontally.innerData == "true") ? true : false;
                 properties.flipVertical = (source.node.FlipVertically.innerData == "true") ? true : false;
-                properties.origin = new Point(source.node.Origin);
+                properties.origin = Point.FromXML(source.node.Origin);
                 properties.textureFilename = source.node.texture_filename.innerData;
+                properties.tint = Color.FromXML(source.node.TintColor);
                 //TODO: create from textureFilename asset name
                 //properties.assetName = source.node.texture_filename.innerData;
                 layer.properties = properties;
