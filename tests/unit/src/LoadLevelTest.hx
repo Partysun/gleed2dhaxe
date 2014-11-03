@@ -25,7 +25,6 @@ class LoadLevelTest extends TestCase {
         var loader:LevelLoader = new LevelLoader();
         var source = haxe.Resource.getString("map");
         level = loader.load(source);
-        //var fileData:String = sys.io.File.getContent("assets/");
     }
 
     public function testSetup() {
@@ -59,6 +58,61 @@ class LoadLevelTest extends TestCase {
 
         //cp = new CustomProperty("lovely color", color, IItemPropertie, "Like a gentleman...");
         //assertEquals(cp.type, IItemPropertie);
+        var source = " 
+                <Item xsi:type='TextureItem' Name='Texture_0030' Visible='true'>
+                    <Position>
+                        <X>448</X>
+                        <Y>-768</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name='islarge' Type='bool' Description='The Biggest Tree'>
+                            <boolean>true</boolean>
+                        </Property>
+                        <Property Name='hello' Type='string' Description=''>
+                            <string>world</string>
+                        </Property>
+                        <Property Name='Check' Type='point' Description=''>
+                            <point>
+                                <X>0.693748534</X>
+                                <Y>0.693748534</Y>
+                            </point>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.693748534</X>
+                        <Y>0.693748534</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Y:\\Glue Project\\Test Sprites\tree.png</texture_filename>
+                    <asset_name>Y:\\Glue Project\\Test Sprites\tree</asset_name>
+                    <Origin>
+                        <X>951</X>
+                        <Y>1152</Y>
+                    </Origin>
+                </Item>
+        ";
+
+        source = StringTools.replace(source, "xsi:type", "Type");
+        var source:Fast = new Fast(Xml.parse(source).firstElement());
+        var layerItem:LayerItem = gleed2dhaxe.LayerItem.FromXML(source);
+        assertEquals(source.att.Type, "TextureItem");
+        assertEquals(layerItem.properties.name, "Texture_0030");
+        assertEquals(layerItem.properties.customProperties.length, 3);
+        assertEquals(layerItem.properties.customProperties[0].name, 'islarge');
+        assertEquals(layerItem.properties.customProperties[0].type, Bool);
+        assertEquals(layerItem.properties.customProperties[0].description, "The Biggest Tree");
+        assertEquals(layerItem.properties.customProperties[0].value, true);
+        assertEquals(layerItem.properties.customProperties[1].value, "world");
+        assertEquals(layerItem.properties.customProperties[2].value.x, 0.693748534);
     }
 
     //public function testLevelProperties() {
@@ -93,6 +147,70 @@ class LoadLevelTest extends TestCase {
         assertEquals(level.layers[0].items[0].properties.tint.red, 255);
         assertEquals(level.layers[0].items[0].properties.position.x, 512);
         assertEquals(level.layers[0].items[0].properties.position.y, -320);
+    }
+
+    public function testRectangleItem() {
+        var source = " 
+            <Item xsi:type='RectangleItem' Name='Rectangle_7523' Visible='true'>
+                    <Position>
+                        <X>-14464</X>
+                        <Y>-20992</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>1280</Width>
+                    <Height>11904</Height>
+                    <FillColor>
+                        <R>0</R>
+                        <G>0</G>
+                        <B>255</B>
+                        <A>145</A>
+                        <PackedValue>2432696575</PackedValue>
+                    </FillColor>
+                </Item>
+        ";
+        source = StringTools.replace(source, "xsi:type", "Type");
+        var source:Fast = new Fast(Xml.parse(source).firstElement());
+        var layerItem:LayerItem = gleed2dhaxe.LayerItem.FromXML(source);
+        assertEquals(source.att.Type, "RectangleItem");
+        assertEquals(layerItem.properties.name, "Rectangle_7523");
+        assertEquals(layerItem.properties.isVisible, true);
+        assertEquals(layerItem.properties.fillColor.red, 0);
+        assertEquals(layerItem.properties.fillColor.green, 0);
+        assertEquals(layerItem.properties.fillColor.blue, 255);
+        assertEquals(layerItem.properties.fillColor.alpha, 145);
+        assertEquals(layerItem.properties.width, 1280);
+        assertEquals(layerItem.properties.height, 11904);
+    }
+
+    public function testCircleItem() {
+        var source = " 
+            <Item xsi:type='CircleItem' Name='Circle_67' Visible='true'>
+                    <Position>
+                        <X>464</X>
+                        <Y>992</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Radius>80</Radius>
+                    <FillColor>
+                        <R>0</R>
+                        <G>0</G>
+                        <B>255</B>
+                        <A>145</A>
+                        <PackedValue>2432696575</PackedValue>
+                    </FillColor>
+                </Item>
+        ";
+        source = StringTools.replace(source, "xsi:type", "Type");
+        var source:Fast = new Fast(Xml.parse(source).firstElement());
+        var layerItem:LayerItem = gleed2dhaxe.LayerItem.FromXML(source);
+        assertEquals(source.att.Type, "CircleItem");
+        assertEquals(layerItem.properties.name, "Circle_67");
+        assertEquals(layerItem.properties.isVisible, true);
+        assertEquals(layerItem.properties.fillColor.red, 0);
+        assertEquals(layerItem.properties.fillColor.green, 0);
+        assertEquals(layerItem.properties.fillColor.blue, 255);
+        assertEquals(layerItem.properties.fillColor.alpha, 145);
+        assertEquals(layerItem.properties.radius, 80);
     }
 
     public function testTextureItem() {
@@ -272,4 +390,21 @@ class LoadLevelTest extends TestCase {
         assertEquals(point.y, 1);
     }
 
+    public function testColor() {
+        var xml = Xml.parse("
+            <FillColor>
+                <R>0</R>
+                <G>0</G>
+                <B>255</B>
+                <A>145</A>
+                <PackedValue>2432696575</PackedValue>
+            </FillColor>
+        ");
+        var source:Fast = new Fast(xml.firstElement());
+        var color:Color = gleed2dhaxe.Color.FromXML(source);
+        assertEquals(color.red, 0);
+        assertEquals(color.green, 0);
+        assertEquals(color.blue, 255);
+        assertEquals(color.alpha, 145);
+    }
 }

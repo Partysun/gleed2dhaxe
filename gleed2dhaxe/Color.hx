@@ -14,7 +14,7 @@ class Color
         this.red = red;
         this.blue = blue;
         this.green = green;
-        this.alpha = red;
+        this.alpha = alpha;
     }
 
     public static function FromXML(source:Fast):Color {

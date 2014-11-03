@@ -24,11 +24,9 @@ class LayerItem {
                 properties.origin = Point.FromXML(source.node.Origin);
                 properties.textureFilename = source.node.texture_filename.innerData;
                 properties.tint = Color.FromXML(source.node.TintColor);
-                //TODO: create from textureFilename asset name
                 properties.assetName = TextureItemProperties.getFileName(properties.textureFilename);
+                properties.customProperties = ([for (custom_property in source.node.CustomProperties.nodes.Property) CustomProperty.FromXML(custom_property)]);
                 layer.properties = properties;
-                //trace("TextureItem");
-                //TODO
             case "PathItem":
                 var properties = new PathItemProperties();
                 properties.name = source.att.Name;
@@ -40,14 +38,23 @@ class LayerItem {
                 properties.localPoints = ([for (local_point in source.node.LocalPoints.nodes.Vector2) Point.FromXML(local_point)]);
                 properties.worldPoints = ([for (world_point in source.node.WorldPoints.nodes.Vector2) Point.FromXML(world_point)]);
                 layer.properties = properties;
-                //TODO
-                //trace("PathItem");
             case "CircleItem":
-                //TODO
-                trace("CircleItem");
+                var properties = new CircleItemProperties();
+                properties.name = source.att.Name;
+                properties.isVisible = (source.att.Visible == "true") ? true : false;
+                properties.position = Point.FromXML(source.node.Position);
+                properties.radius = Std.parseFloat(source.node.Radius.innerData);
+                properties.fillColor = Color.FromXML(source.node.FillColor);
+                layer.properties = properties;
             case "RectangleItem":
-                //TODO
-                trace("RectangleItem");
+                var properties = new RectangleItemProperties();
+                properties.name = source.att.Name;
+                properties.isVisible = (source.att.Visible == "true") ? true : false;
+                properties.position = Point.FromXML(source.node.Position);
+                properties.width = Std.parseFloat(source.node.Width.innerData);
+                properties.height = Std.parseFloat(source.node.Height.innerData);
+                properties.fillColor = Color.FromXML(source.node.FillColor);
+                layer.properties = properties;
             default:
                 trace("Error");
         }
