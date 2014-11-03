@@ -15,10 +15,6 @@ class Level {
         properties.isVisible = (source.att.Visible == "true") ? true : false;
 
         layers = ([for (layer in source.node.Layers.nodes.Layer) new Layer(layer)]);
-        
-        #if debug
-        trace("Create new Level");
-        #end
     }
 
 }

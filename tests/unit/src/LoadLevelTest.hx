@@ -17,10 +17,14 @@ using gleed2dhaxe.CustomProperty;
 class LoadLevelTest extends TestCase {
 
     var str: String;
+    var level:Level;
 
     override public function setup() {
         str = "foo";
 
+        var loader:LevelLoader = new LevelLoader();
+        var source = haxe.Resource.getString("map");
+        level = loader.load(source);
         //var fileData:String = sys.io.File.getContent("assets/");
     }
 
@@ -75,9 +79,6 @@ class LoadLevelTest extends TestCase {
     //}
 
     public function testLoadLevel() {
-        var loader:LevelLoader = new LevelLoader();
-        var source = haxe.Resource.getString("map");
-        var level:Level = loader.load(source);
         assertEquals(level.properties.name, "Level1");
         assertTrue(level.properties.isVisible);
         assertEquals(level.layers[0].properties.name, "layer_sky");
@@ -139,7 +140,7 @@ class LoadLevelTest extends TestCase {
         assertEquals(layerItem.properties.flipHorizontal, false);
         assertEquals(layerItem.properties.flipVertical, false);
         assertEquals(layerItem.properties.textureFilename, "Y:\\Glue Project\\Test Sprites\\sky.png");
-        assertEquals(layerItem.properties.assetName, "sky");
+        assertEquals(layerItem.properties.assetName, "sky.png");
         assertEquals(layerItem.properties.origin.x, 512);
         assertEquals(layerItem.properties.origin.y, 384);
     }

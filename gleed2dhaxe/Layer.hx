@@ -15,10 +15,6 @@ class Layer {
         properties.scrollFactor = Point.FromXML(source.node.ScrollSpeed);
 
         items = ([for (item in source.node.Items.nodes.Item) LayerItem.FromXML(item)]);
-    
-        #if debug
-        trace("Create new Layer");
-        #end
     }
 
 }
