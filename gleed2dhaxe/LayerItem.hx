@@ -17,6 +17,8 @@ class LayerItem {
                 properties.name = source.att.Name;
                 properties.isVisible = (source.att.Visible == "true") ? true : false;
                 properties.position = Point.FromXML(source.node.Position);
+                properties.customProperties = ([for (custom_property in source.node.CustomProperties.nodes.Property) CustomProperty.FromXML(custom_property)]);
+
                 properties.scale = Point.FromXML(source.node.Scale);
                 properties.rotation = Std.parseFloat(source.node.Rotation.innerData);
                 properties.flipHorizontal = (source.node.FlipHorizontally.innerData == "true") ? true : false;
@@ -25,7 +27,6 @@ class LayerItem {
                 properties.textureFilename = source.node.texture_filename.innerData;
                 properties.tint = Color.FromXML(source.node.TintColor);
                 properties.assetName = TextureItemProperties.getFileName(properties.textureFilename);
-                properties.customProperties = ([for (custom_property in source.node.CustomProperties.nodes.Property) CustomProperty.FromXML(custom_property)]);
                 layer.properties = properties;
             case "PathItem":
                 var properties = new PathItemProperties();
