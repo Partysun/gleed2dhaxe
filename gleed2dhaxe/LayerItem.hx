@@ -33,6 +33,8 @@ class LayerItem {
                 properties.name = source.att.Name;
                 properties.isVisible = (source.att.Visible == "true") ? true : false;
                 properties.position = Point.FromXML(source.node.Position);
+                properties.customProperties = ([for (custom_property in source.node.CustomProperties.nodes.Property) CustomProperty.FromXML(custom_property)]);
+
                 properties.lineWidth = Std.parseInt(source.node.LineWidth.innerData);
                 properties.lineColor = Color.FromXML(source.node.LineColor);
                 properties.isPolygon = (source.node.IsPolygon.innerData == "true") ? true : false;
@@ -44,6 +46,8 @@ class LayerItem {
                 properties.name = source.att.Name;
                 properties.isVisible = (source.att.Visible == "true") ? true : false;
                 properties.position = Point.FromXML(source.node.Position);
+                properties.customProperties = ([for (custom_property in source.node.CustomProperties.nodes.Property) CustomProperty.FromXML(custom_property)]);
+
                 properties.radius = Std.parseFloat(source.node.Radius.innerData);
                 properties.fillColor = Color.FromXML(source.node.FillColor);
                 layer.properties = properties;
@@ -52,6 +56,8 @@ class LayerItem {
                 properties.name = source.att.Name;
                 properties.isVisible = (source.att.Visible == "true") ? true : false;
                 properties.position = Point.FromXML(source.node.Position);
+                properties.customProperties = ([for (custom_property in source.node.CustomProperties.nodes.Property) CustomProperty.FromXML(custom_property)]);
+
                 properties.width = Std.parseFloat(source.node.Width.innerData);
                 properties.height = Std.parseFloat(source.node.Height.innerData);
                 properties.fillColor = Color.FromXML(source.node.FillColor);
